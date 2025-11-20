@@ -1,3 +1,10 @@
+/**
+ * Description placeholder
+ *
+ * @export
+ * @class Vie
+ * @typedef {Vie}
+ */
 export default class Vie{
     constructor(){
         this.vie = 3;
@@ -5,9 +12,6 @@ export default class Vie{
 
     loose(){
         this.vie--;
-    }
-
-    reset(){
-        this.vie =3;
+        return this.vie
     }
 }
