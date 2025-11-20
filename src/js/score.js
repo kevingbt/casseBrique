@@ -1,3 +1,10 @@
+/**
+ * Description placeholder
+ *
+ * @export
+ * @class Score
+ * @typedef {Score}
+ */
 export default class Score {
   constructor() {
     this.score = 0;
