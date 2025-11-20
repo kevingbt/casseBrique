@@ -1,5 +1,17 @@
 // Classe Bloc unifiée pour les briques et la grille
 class Bloc {
+  /**
+   * Créé une instance de Bloc.
+   *
+   * @constructor
+   * @param {*} columnCount 
+   * @param {*} rowCount 
+   * @param {*} width 
+   * @param {*} height 
+   * @param {*} padding 
+   * @param {*} offsetTop 
+   * @param {*} offsetLeft 
+   */
   constructor(columnCount, rowCount, width, height, padding, offsetTop, offsetLeft) {
     // Paramètres de la grille
     this.columnCount = columnCount;
@@ -18,6 +30,7 @@ class Bloc {
     this.initializeBricks();
   }
 
+  /** Création des blocs */
   initializeBricks() {
     for (let c = 0; c < this.columnCount; c++) {
       this.bricks[c] = [];
@@ -36,6 +49,11 @@ class Bloc {
     }
   }
 
+  /**
+   * Dessine les blocs
+   *
+   * @param {*} ctx 
+   */
   draw(ctx) {
     for (let c = 0; c < this.columnCount; c++) {
       for (let r = 0; r < this.rowCount; r++) {
@@ -51,6 +69,12 @@ class Bloc {
     }
   }
 
+
+  /**
+   * Compte les blocs touchés et ceux restants
+   *
+   * @returns {number} 
+   */
   getActiveBrickCount() {
     let count = 0;
     for (let c = 0; c < this.columnCount; c++) {
