@@ -88,4 +88,4 @@ class Bloc {
   }
 }
 
-export default Bloc;
+document.getElementById("myCanvas");
