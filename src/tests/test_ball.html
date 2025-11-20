@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #cac6c6;
+        }
+    </style>
+    
+    <canvas id="myCanvas" width="650" height="600"></canvas>
+
+    <script src="..\js\ball.js"></script>
+
+    <script>
+        let canvas = document.getElementById("myCanvas");
+        let ctx = canvas.getContext("2d");
+        let ball = new Ball(325, 300, 10, "#ff0000");
+        ball.draw(ctx);
+    </script>    
+</body>
+</html>
