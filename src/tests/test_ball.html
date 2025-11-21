@@ -27,10 +27,12 @@
         import Ball  from "../js/ball.js";
         let canvas = document.getElementById("myCanvas");
         let ctx = canvas.getContext("2d");
-        let ball = new Ball(325, 300, 10, "blue");
-        ball.draw(ctx);
-        
-
+        let ball1 = new Ball(325, 300, 10, "blue");
+        ball1.draw(ctx);
+        let ball2 = new Ball(200, 150, 50, "red");
+        ball2.draw(ctx);
+        let ball3 = new Ball(450, 450, 100, "green");
+        ball3.draw(ctx);
     </script>    
 </body>
 </html>
