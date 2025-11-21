@@ -5,10 +5,13 @@
  * @class Score
  * @typedef {Score}
  */
+
 export default class Score {
-  constructor() {
-    this.score = 0;
+
+  constructor(){
+    this.score=0;
   }
+
   scoreUp() {
     this.score += 100;
     /*if (score == brickRowCount * brickColumnCount) {
@@ -16,7 +19,10 @@ export default class Score {
       document.location.reload();
     }*/
   }
-  getScore() {
-    return this.score;
+
+  draw(ctx){  //param : canva
+    ctx.font = "16px Arial";
+    ctx.fillStyle = "#0095DD";
+    ctx.fillText(`Score: ${this.score}`, 8, 20);
   }
 }

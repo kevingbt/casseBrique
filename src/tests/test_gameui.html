@@ -8,17 +8,24 @@
 </head>
 
 <body>
+    <canvas id="myCanvas" width="650" height="600"></canvas>
     <script type="module">
-        import Vie from "../js/vie.js";
+        import Vie  from "../js/vie.js";
         import Score from "../js/score.js";
-        console.log("Testing Score");
-        var score = new Score();
-        score.scoreUp();
-        console.log(score);
-        var newVie = new Vie();
-        console.log("vies :", newVie);
-        newVie.loose();
-        console.log("vies :", newVie);
+        import GameUI from "../js/gameUI.js";
+
+        let canvas = document.getElementById("myCanvas");
+        let ctx = canvas.getContext("2d");
+
+        let game = new GameUI(ctx,3);
+        game.draw();
+        // let score = new Score;
+        // score.scoreUp();
+        // console.log(score);
+        // let newVie = new Vie();
+        // console.log("vies :", newVie);
+        // newVie.loose();
+        // console.log("vies :", newVie);
     </script>
 </body>
 
