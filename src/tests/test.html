@@ -27,19 +27,19 @@
 
     <script type="module">
       import Grid from "../js/grid.js";
-      import Bloc from "../js/bloc.js";  
+      import Bloc from "../js/bloc.js";
 
       const canvas = document.getElementById("canvas");
       const ctx = canvas.getContext("2d");
 
-      // Créer la grille
-      const grid = new Grid(6, 9, 75, 20, 10, 30, 30);
+      // Attention : canvas.width est envoyé pour centrer automatiquement
+      const grid = new Grid(8, 6, 75, 20, 10, 30, canvas.width, 0.4);
 
-      // Transformer chaque entrée de grille en Bloc
+      // Transformer la grille → blocs
       const blocks = [];
-      grid.getBricks().forEach((col) => {
-        col.forEach((b) => {
-          blocks.push(new Bloc(b.x, b.y, grid.width, grid.height));
+      grid.getBricks().forEach((row) => {
+        row.forEach((b) => {
+          blocks.push(new Bloc(b.x, b.y, b.width, b.height));
         });
       });
 
@@ -47,10 +47,8 @@
         ctx.fillStyle = "#000";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        blocks.forEach((block) => block.draw(ctx));
-
-        ctx.fillStyle = "#fff";
-        console.log(`Blocs actifs: ${blocks.length}`, 10, canvas.height - 10);
+        // dessiner les blocs
+        blocks.forEach((b) => b.draw(ctx));
       }
 
       draw();

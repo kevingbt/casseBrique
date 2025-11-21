@@ -1,27 +1,49 @@
 export default class Grid {
-  constructor(columnCount, rowCount, width, height, padding, offsetTop, offsetLeft) {
+  constructor(
+    columnCount,
+    rowCount,
+    width,
+    height,
+    padding,
+    offsetTop,
+    canvasWidth
+  ) {
     this.columnCount = columnCount;
     this.rowCount = rowCount;
-    this.padding = padding;
-    this.offsetTop = offsetTop;
-    this.offsetLeft = offsetLeft;
 
     this.width = width;
     this.height = height;
+    this.padding = padding;
+    this.offsetTop = offsetTop;
+
+    this.canvasWidth = canvasWidth;
 
     this.bricks = [];
     this.initializeBricks();
   }
 
   initializeBricks() {
-    for (let c = 0; c < this.columnCount; c++) {
-      this.bricks[c] = [];
+    // Largeur totale de la grille
+    const totalGridWidth =
+      this.columnCount * this.width +
+      (this.columnCount - 1) * this.padding;
 
-      for (let r = 0; r < this.rowCount; r++) {
-        const x = r * (this.width + this.padding) + this.offsetLeft;
-        const y = c * (this.height + this.padding) + this.offsetTop;
+    // CENTRAGE PARFAIT
+    const offsetLeft = (this.canvasWidth - totalGridWidth) / 2;
 
-        this.bricks[c][r] = { x, y };
+    for (let row = 0; row < this.rowCount; row++) {
+      this.bricks[row] = [];
+
+      for (let col = 0; col < this.columnCount; col++) {
+        const x = offsetLeft + col * (this.width + this.padding);
+        const y = this.offsetTop + row * (this.height + this.padding);
+
+        this.bricks[row][col] = {
+          x,
+          y,
+          width: this.width,
+          height: this.height,
+        };
       }
     }
   }
