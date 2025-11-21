@@ -39,14 +39,14 @@ class Barre {
      * @param {*} e 
      */
     keyDownHandler(e) {
-      console.log("keyDownHandler")
-      console.log(`e.key=${e.key}`)
+      //console.log("keyDownHandler")
+      //console.log(`e.key=${e.key}`)
         if (e.key === "Right" || e.key === "ArrowRight") {
             this.rightPressed = true;
         if (this.rightPressed && this.paddleX < this.canvas.width - this.paddleWidth) {
           this.paddleX += 7;}
         } else if (e.key === "Left" || e.key === "ArrowLeft") {
-          console.log("touche gauche ok")
+         // console.log("touche gauche ok")
             this.leftPressed = true;
            if (this.leftPressed && this.paddleX > 0) {
           this.paddleX -= 7; }
