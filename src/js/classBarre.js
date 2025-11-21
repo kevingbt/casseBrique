@@ -9,9 +9,9 @@ class Barre {
      * @param {number} [paddleHeight=10] 
      * @param {number} [paddleWidth=75] 
      */
-    constructor(canvas, ctx, paddleHeight = 10, paddleWidth = 75) {
+    constructor(canvas, paddleHeight = 10, paddleWidth = 75) {
         this.canvas = canvas;
-        this.ctx = ctx;
+        this.ctx = this.canvas.getContext("2d");
 
         // Paramètres barre
         this.paddleHeight = paddleHeight;
@@ -80,6 +80,7 @@ class Barre {
 
     /** Description placeholder */
     drawPaddle() {
+        console.log("test", this.ctx)
         this.ctx.beginPath();
         this.ctx.rect(
             this.paddleX,
