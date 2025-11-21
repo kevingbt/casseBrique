@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>test grid</title>
+
+    <style>
+        body {
+            
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        canvas {
+            border: 2px solid #0095DD;
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="testCanvas" width="500" height="300"></canvas>
+
+    <script type="module">
+        import Grid from "../js/grid.js";
+
+        const canvas = document.getElementById("testCanvas");
+        const ctx = canvas.getContext("2d");
+
+        // Ta grille
+        const g = new Grid(7, 4, 50, 20, 8, 30, 20);
+        console.log(g);
+
+        // --- Dessin temporaire des briques ---
+        g.bricks.forEach(col => {
+          col.forEach(b => {
+            ctx.fillStyle = "#0095DD";   // vert néon
+            ctx.fillRect(b.x, b.y, b.width, b.height);
+          });
+        });
+
+        console.log("test");
+    </script>
+
+</body>
+</html>
