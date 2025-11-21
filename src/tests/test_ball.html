@@ -21,13 +21,16 @@
     
     <canvas id="myCanvas" width="650" height="600"></canvas>
 
-    <script src="..\js\ball.js"></script>
 
-    <script>
+
+    <script type="module">
+        import Ball  from "../js/ball.js";
         let canvas = document.getElementById("myCanvas");
         let ctx = canvas.getContext("2d");
-        let ball = new Ball(325, 300, 10, "#ff0000");
+        let ball = new Ball(325, 300, 10, "blue");
         ball.draw(ctx);
+        
+
     </script>    
 </body>
 </html>
