@@ -33,7 +33,7 @@
       const ctx = canvas.getContext("2d");
 
       // Créer la grille
-      const grid = new Grid(8, 3, 75, 15, 10, 30, 30);
+      const grid = new Grid(6, 9, 75, 20, 10, 30, 30);
 
       // Transformer chaque entrée de grille en Bloc
       const blocks = [];
@@ -50,7 +50,7 @@
         blocks.forEach((block) => block.draw(ctx));
 
         ctx.fillStyle = "#fff";
-        ctx.fillText(`Blocs actifs: ${blocks.length}`, 10, canvas.height - 10);
+        console.log(`Blocs actifs: ${blocks.length}`, 10, canvas.height - 10);
       }
 
       draw();
