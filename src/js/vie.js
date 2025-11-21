@@ -5,6 +5,7 @@
  * @class Vie
  * @typedef {Vie}
  */
+
 export default class Vie{
     constructor(){
         this.vie = 3;
@@ -12,6 +13,8 @@ export default class Vie{
 
     loose(){
         this.vie--;
-        return this.vie
+        if (this.vie === 0){
+            alert("GAME OVER")
+        }
     }
 }
