@@ -11,10 +11,10 @@ export default class Score {
   }
   scoreUp() {
     this.score += 100;
-    if (score == brickRowCount * brickColumnCount) {
+    /*if (score == brickRowCount * brickColumnCount) {
       alert("YOU WIN, CONGRATS!");
       document.location.reload();
-    }
+    }*/
   }
   getScore() {
     return this.score;
