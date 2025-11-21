@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Grid et Blocs</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 20px;
+        background-color: #222;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        font-family: Arial, sans-serif;
+      }
+      canvas {
+        border: 2px solid #fff;
+        background-color: #000;
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas" width="800" height="600"></canvas>
+
+    <script type="module">
+      import Grid from "../js/grid.js";
+      import Bloc from "../js/bloc.js";  
+
+      const canvas = document.getElementById("canvas");
+      const ctx = canvas.getContext("2d");
+
+      // Créer la grille
+      const grid = new Grid(8, 3, 75, 15, 10, 30, 30);
+
+      // Transformer chaque entrée de grille en Bloc
+      const blocks = [];
+      grid.getBricks().forEach((col) => {
+        col.forEach((b) => {
+          blocks.push(new Bloc(b.x, b.y, grid.width, grid.height));
+        });
+      });
+
+      function draw() {
+        ctx.fillStyle = "#000";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        blocks.forEach((block) => block.draw(ctx));
+
+        ctx.fillStyle = "#fff";
+        ctx.fillText(`Blocs actifs: ${blocks.length}`, 10, canvas.height - 10);
+      }
+
+      draw();
+    </script>
+  </body>
+</html>

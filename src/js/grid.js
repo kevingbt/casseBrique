@@ -1,4 +1,4 @@
- class Grid {
+export default class Grid {
   constructor(columnCount, rowCount, width, height, padding, offsetTop, offsetLeft) {
     this.columnCount = columnCount;
     this.rowCount = rowCount;
@@ -8,7 +8,6 @@
 
     this.width = width;
     this.height = height;
-    this.color = "#0095DD";
 
     this.bricks = [];
     this.initializeBricks();
@@ -17,21 +16,17 @@
   initializeBricks() {
     for (let c = 0; c < this.columnCount; c++) {
       this.bricks[c] = [];
-      for (let r = 0; r < this.rowCount; r++) {
-        const brickX = (r * (this.width + this.padding)) + this.offsetLeft;
-        const brickY = (c * (this.height + this.padding)) + this.offsetTop;
 
-        this.bricks[c][r] = {
-          x: brickX,
-          y: brickY,
-          width: this.width,
-          height: this.height,
-          status: 1,
-          color: this.color
-        };
+      for (let r = 0; r < this.rowCount; r++) {
+        const x = r * (this.width + this.padding) + this.offsetLeft;
+        const y = c * (this.height + this.padding) + this.offsetTop;
+
+        this.bricks[c][r] = { x, y };
       }
     }
   }
-}
 
-export default Grid
+  getBricks() {
+    return this.bricks;
+  }
+}
