@@ -1,31 +1,27 @@
-// Classe Bloc unifiée pour les briques et la grille
+// Classe Bloc - Création de briques
 class Bloc {
   /**
-   * Créé une instance de Bloc.
+   * Crée une instance de Bloc.
    *
    * @constructor
-   * @param {*} columnCount 
-   * @param {*} rowCount 
-   * @param {*} width 
-   * @param {*} height 
-   * @param {*} padding 
-   * @param {*} offsetTop 
-   * @param {*} offsetLeft 
+   * @param {number} columnCount 
+   * @param {number} rowCount 
+   * @param {number} width 
+   * @param {number} height 
+   * @param {number} padding 
+   * @param {number} offsetTop 
+   * @param {number} offsetLeft 
    */
   constructor(columnCount, rowCount, width, height, padding, offsetTop, offsetLeft) {
-    // Paramètres de la grille
     this.columnCount = columnCount;
     this.rowCount = rowCount;
+    this.width = width;
+    this.height = height;
     this.padding = padding;
     this.offsetTop = offsetTop;
     this.offsetLeft = offsetLeft;
+    this.color = "purple";
 
-    // Paramètres de la brique
-    this.width = width;
-    this.height = height;
-    this.color = "#0095DD";
-
-    // Grille des briques
     this.bricks = [];
     this.initializeBricks();
   }
@@ -50,42 +46,13 @@ class Bloc {
   }
 
   /**
-   * Dessine les blocs
+   * Retourne la grille de briques
    *
-   * @param {*} ctx 
+   * @returns {Array}
    */
-  draw(ctx) {
-    for (let c = 0; c < this.columnCount; c++) {
-      for (let r = 0; r < this.rowCount; r++) {
-        const brick = this.bricks[c][r];
-        if (brick.status === 1) {
-          ctx.beginPath();
-          ctx.rect(brick.x, brick.y, brick.width, brick.height);
-          ctx.fillStyle = brick.color;
-          ctx.fill();
-          ctx.closePath();
-        }
-      }
-    }
-  }
-
-
-  /**
-   * Compte les blocs touchés et ceux restants
-   *
-   * @returns {number} 
-   */
-  getActiveBrickCount() {
-    let count = 0;
-    for (let c = 0; c < this.columnCount; c++) {
-      for (let r = 0; r < this.rowCount; r++) {
-        if (this.bricks[c][r].status === 1) {
-          count++;
-        }
-      }
-    }
-    return count;
+  getBricks() {
+    return this.bricks;
   }
 }
 
-document.getElementById("myCanvas");
+export default Bloc;

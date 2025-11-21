@@ -5,13 +5,14 @@
 </head>
 <body>
     <canvas id="myCanvas" width="800" height="600"></canvas>
-    <script src="../js/bloc.js"></script>
-    <script>
+
+    <script type="module">
+        import Bloc from '../js/bloc.js';
         const canvas = document.getElementById('myCanvas');
         const ctx = canvas.getContext('2d');
         
         // Créer une grille de briques
-        const blocGrid = new Bloc(8, 3, 75, 15, 10, 30, 30);
+        const blocGrid = new Bloc(10, 3, 75, 15, 10, 30, 30);
         
         // Dessiner les briques
         blocGrid.draw(ctx);
