@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        canvas {
+            background: #cac6c6;
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Test "barre" jeux casse-brique</h1>
+<canvas id="myCanvas" width="650" height="600"></canvas>
+
+<script type="module">
+    import Barre from "../js/classBarre.js";
+
+    const canvas = document.getElementById("myCanvas");
+    const ctx = canvas.getContext("2d");
+
+    // ✔️ ON NE RÉUTILISE PAS LE NOM Barre !
+    const barre = new Barre(canvas, ctx);
+
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        barre.drawPaddle();   // ✔️ méthode sur l’instance
+        requestAnimationFrame(draw);
+    }
+
+    draw();
+</script>
+
+</body>
+</html>
