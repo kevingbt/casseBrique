@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "target": "ES2020",
+    "checkJs": true,
+    "baseUrl": ".",
+    "paths": {
+      "*": ["src/js/*"]
+    }
+  },
+  "include": ["src/**/*.js"],
+  "exclude": ["node_modules", "legacy", "dist", "build"]
+}

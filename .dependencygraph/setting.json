@@ -1,0 +1,21 @@
+{
+  "alias": {},
+  "js": {
+    "webpackConfig": "",
+    "entryPoints": [
+      "src/js/gameUI.js"
+    ],
+    "includeNpm": false,
+    "exclude": []
+  },
+  "entryFilePath": "src/js/index.js",
+  "resolveExtensions": [
+    ".js",
+    ".jsx",
+    ".ts",
+    ".tsx",
+    ".vue",
+    ".scss",
+    ".less"
+  ]
+}

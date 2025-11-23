@@ -1,0 +1,13 @@
+{
+  "name": "casse-brique",
+  "version": "1.0.0",
+  "description": "Jeu de casse-brique en JavaScript vanilla",
+  "type": "module",
+  "main": "src/js/index.js",
+  "scripts": {
+    "start": "python -m http.server 8000"
+  },
+  "keywords": ["game", "breakout", "canvas"],
+  "author": "",
+  "license": "ISC"
+}
