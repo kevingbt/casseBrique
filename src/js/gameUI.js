@@ -27,16 +27,18 @@ export default class GameUI {
 
     draw(){
         let ctx = this.canvas.getContext("2d");
-        console.log(this.ballList);
-        console.log(this.ballList[0]);
-        let currentBall = this.ballList[0];
+        
+        // Déplacer la balle
+        this.ballList[0].move(this.canvas, this.vie, this.barre);
+        
+        // Dessiner la balle
         this.ballList[0].draw(ctx);
+        
         // affiche grille
         let grid = new Grid(10, 6, 75, 15, 10, 30, this.canvas);
         grid.draw(ctx);
 
         // affiche vie
-        console.log(this.vie);
         this.vie.draw(ctx);
 
         // affiche score
