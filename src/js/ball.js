@@ -11,12 +11,13 @@
  */
 class Ball {
     
-    constructor(x, y, radius, color = "blue") {
+    constructor(x, y, radius, brick, color = "blue") {
 
         this.x = x;             // Position de X
         this.y = y;             // Position de Y
         this.radius = radius;   // Rayon
         this.color = color;     // Couleur
+        this.brick = brick;
         // Vitesses par défaut
         this.dx = 2;
         this.dy = -2;
@@ -72,6 +73,23 @@ class Ball {
                 this.dy = -2;
                 paddle.paddleX = (canvas.width - paddle.paddleWidth) / 2;
             }
+        }else { // Quand ça touche une brick
+            for (var c = 0; c < this.brick.brickColumnCount; c++) {
+                for (var r = 0; r < this.brick.brickRowCount; r++) {
+                  var b = this.brick.bricks[c][r];
+                  if (b.status == 1) {
+                    if (
+                      this.x > b.x &&
+                      this.x < b.x + this.brick.brickWidth &&
+                      this.y > b.y &&
+                      this.y < b.y + this.brick.brickHeight
+                    ) {
+                      this.dy = -this.dy;
+                      b.status = 0;
+                    }
+                  }
+                }
+              }
         }
         this.x += this.dx;
         this.y += this.dy;
