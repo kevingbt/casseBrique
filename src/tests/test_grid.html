@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Grid</title>
+</head>
+<body>
+    <canvas id="myCanvas" width="800" height="600"></canvas>
+
+    <script type="module">
+        import Grid from '../js/grid.js';
+        const canvas = document.getElementById('myCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Créer une grille de briques
+        const grid = new Grid(10, 6, 75, 15, 10, 30, canvas);
+
+        // Initialisation de la grille
+        //grid.initializeBricks()
+        
+        // Dessiner les briques
+        grid.draw(ctx);
+        
+        // Afficher le nombre de briques actives
+        //console.log('Briques actives :', grid.getActiveBrickCount());
+    </script>
+</body>
+</html>

@@ -17,16 +17,6 @@ canvas.height = 400;
 // Initialisation du jeu
 const gameUI = new GameUI(canvas, 3);
 
-// Initialisation de la grille de briques
-const grid = new Grid(
-  5,      // columnCount
-  3,      // rowCount
-  75,     // width
-  20,     // height
-  10,     // padding
-  30,     // offsetTop
-  canvas.width
-);
 
 /**
  * Boucle principale du jeu

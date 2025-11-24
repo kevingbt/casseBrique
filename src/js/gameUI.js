@@ -2,6 +2,8 @@ import Vie from "./vie.js";
 import Score from "./score.js";
 import Ball from "./ball.js";
 import Barre from "./classBarre.js";
+import Grid from "./grid.js";
+
 
 /**
  * Description placeholder
@@ -29,10 +31,18 @@ export default class GameUI {
         console.log(this.ballList[0]);
         let currentBall = this.ballList[0];
         this.ballList[0].draw(ctx);
-        // affiche raquette, grille
+        // affiche grille
+        let grid = new Grid(10, 6, 75, 15, 10, 30, this.canvas);
+        grid.draw(ctx);
+
+        // affiche vie
         console.log(this.vie);
         this.vie.draw(ctx);
+
+        // affiche score
         this.score.draw(ctx);
+
+        // affiche barre (paddle)
         this.barre.drawPaddle();
     };
     
