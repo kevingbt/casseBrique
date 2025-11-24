@@ -1,3 +1,6 @@
+import Vie from "./vie.js";
+
+
 /**
  * @class
  *
@@ -50,7 +53,7 @@ class Ball {
 
         // quand sa touche le sol
         else if (this.y + this.dy > canvas.height - this.radius) {
-            livesObj.lives--;
+            livesObj.loose();
 
             if (livesObj.lives <= 0) {
                 this.x = canvas.width / 2;
