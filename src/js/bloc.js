@@ -12,5 +12,5 @@ export default class Bloc {
     if (!this.active) return;
     ctx.fillStyle = this.color;
     ctx.fillRect(this.x, this.y, this.width, this.height);
-  }
+  } 
 }
