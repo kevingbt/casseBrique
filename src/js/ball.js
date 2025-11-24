@@ -51,6 +51,12 @@ class Ball {
             this.dy = -this.dy;
         }
 
+        // Collision avec la barre
+        else if (this.y + this.dy > canvas.height - this.radius - paddle.paddleHeight &&
+                 this.x > paddle.paddleX && 
+                 this.x < paddle.paddleX + paddle.paddleWidth) {
+            this.dy = -this.dy;
+        }
         // quand sa touche le sol
         else if (this.y + this.dy > canvas.height - this.radius) {
             livesObj.loose();
@@ -60,14 +66,14 @@ class Ball {
                 this.y = canvas.height - 30;
                 this.dx = 2;
                 this.dy = -2;
-                paddle.x = (canvas.width - paddle.width) / 2;                
+                paddle.paddleX = (canvas.width - paddle.paddleWidth) / 2;                
             } 
             else {
                 this.x = canvas.width / 2;
                 this.y = canvas.height - 30;
                 this.dx = 2;
                 this.dy = -2;
-                paddle.x = (canvas.width - paddle.width) / 2;
+                paddle.paddleX = (canvas.width - paddle.paddleWidth) / 2;
             }
         }
         this.x += this.dx;
