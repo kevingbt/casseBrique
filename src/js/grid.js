@@ -1,40 +1,42 @@
 export default class Grid {
-  constructor(
-    columnCount,
-    rowCount,
-    width,
-    height,
-    padding,
-    offsetTop,
-    canvasWidth
-  ) {
-    this.columnCount = columnCount;
-    this.rowCount = rowCount;
 
-    this.width = width;
-    this.height = height;
-    this.padding = padding;
-    this.offsetTop = offsetTop;
+  constructor(canvasWidth) {
 
+    // --- PARAMÈTRES FIXÉS ICI ---
+    this.columnCount = 8;   // nombre de colonnes
+    this.rowCount = 6;      // nombre de lignes
+    this.width = 70;        // largeur d'une brique
+    this.height = 20;       // hauteur d'une brique
+    this.padding = 10;      // espace entre les briques
+    this.offsetTop = 30;    // marge haute de la grille
+
+    // --- largeur du canvas envoyée depuis le HTML ---
     this.canvasWidth = canvasWidth;
 
+    // Tableau de briques
     this.bricks = [];
+
+    // Construction de la grille
     this.initializeBricks();
   }
 
+
   initializeBricks() {
+
     // Largeur totale de la grille
     const totalGridWidth =
       this.columnCount * this.width +
       (this.columnCount - 1) * this.padding;
 
-    // CENTRAGE PARFAIT
+    // Centrage horizontal PARFAIT
     const offsetLeft = (this.canvasWidth - totalGridWidth) / 2;
 
+    // Construction ligne par ligne
     for (let row = 0; row < this.rowCount; row++) {
       this.bricks[row] = [];
 
       for (let col = 0; col < this.columnCount; col++) {
+
         const x = offsetLeft + col * (this.width + this.padding);
         const y = this.offsetTop + row * (this.height + this.padding);
 
@@ -42,7 +44,7 @@ export default class Grid {
           x,
           y,
           width: this.width,
-          height: this.height,
+          height: this.height
         };
       }
     }

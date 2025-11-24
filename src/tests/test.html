@@ -25,33 +25,7 @@
   <body>
     <canvas id="canvas" width="800" height="600"></canvas>
 
-    <script type="module">
-      import Grid from "../js/grid.js";
-      import Bloc from "../js/bloc.js";
-
-      const canvas = document.getElementById("canvas");
-      const ctx = canvas.getContext("2d");
-
-      // Attention : canvas.width est envoyé pour centrer automatiquement
-      const grid = new Grid(8, 6, 75, 20, 10, 30, canvas.width, 0.4);
-
-      // Transformer la grille → blocs
-      const blocks = [];
-      grid.getBricks().forEach((row) => {
-        row.forEach((b) => {
-          blocks.push(new Bloc(b.x, b.y, b.width, b.height));
-        });
-      });
-
-      function draw() {
-        ctx.fillStyle = "#000";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-        // dessiner les blocs
-        blocks.forEach((b) => b.draw(ctx));
-      }
-
-      draw();
-    </script>
+ <script type="module" src="../js/gridBloc.js"></script>
+    
   </body>
 </html>
