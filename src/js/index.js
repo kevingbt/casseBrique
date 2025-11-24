@@ -1,4 +1,4 @@
-import GameUI from "./gameUI.js";
+import GameUI from "./components/gameUI.js";
 
 /**
  * Point d'entrée principal du jeu Casse-Brique
