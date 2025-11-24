@@ -20,8 +20,7 @@ class Bloc {
     this.status = status;
   }
 
-  draw(ctx) {
-    console.log(`dessiner bloc x=${this.x}`);
+draw(ctx) {
     // Dessiner la brique si elle est active (status >= 1)
     if (this.status != 0) {
       ctx.beginPath();

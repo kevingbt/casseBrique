@@ -58,8 +58,7 @@ class Barre {
      *
      * @param {*} e 
      */
-    keyUpHandler(e) {
-      console.log("keyUpHandler")
+keyUpHandler(e) {
         if (e.key === "Right" || e.key === "ArrowRight") {
             this.rightPressed = false;
         } else if (e.key === "Left" || e.key === "ArrowLeft") {
@@ -78,9 +77,8 @@ class Barre {
         }
     }
 
-    /** Description placeholder */
+/** Description placeholder */
     drawPaddle() {
-        console.log("test", this.ctx)
         this.ctx.beginPath();
         this.ctx.rect(
             this.paddleX,

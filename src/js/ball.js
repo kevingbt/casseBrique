@@ -36,7 +36,7 @@ class Ball {
         ctx.closePath();               // Fin du dessin
     }
     //  Mouvement et Collisions de la Balle
-    move(canvas, livesObj ,paddle ) {
+    move(canvas, livesObj ,paddle, grid, score ) {
 
         // quand sa touche les murs sur les cotés
         if (this.x + this.dx > canvas.width - this.radius || this.x + this.dx < this.radius) {
@@ -73,6 +73,26 @@ class Ball {
                 paddle.paddleX = (canvas.width - paddle.paddleWidth) / 2;
             }
         }
+
+        // Collision avec les blocs
+        for (let r = 0; r < grid.rowCount; r++) {
+            for (let c = 0; c < grid.columnCount; c++) {
+                let b = grid.bricks[r][c];
+                if (b.status == 1) {
+                    if (
+                        this.x > b.x &&
+                        this.x < b.x + b.width &&
+                        this.y > b.y &&
+                        this.y < b.y + b.height
+                    ) {
+                        this.dy = -this.dy;
+                        b.status = 0;
+                        score.scoreUp();
+                    }
+                }
+            }
+        }
+
         this.x += this.dx;
         this.y += this.dy;
 

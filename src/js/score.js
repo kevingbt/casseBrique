@@ -13,7 +13,7 @@ export default class Score {
   }
 
   scoreUp() {
-    this.score += 100;
+    this.score += 1;
     /*if (score == brickRowCount * brickColumnCount) {
       alert("YOU WIN, CONGRATS!");
       document.location.reload();
