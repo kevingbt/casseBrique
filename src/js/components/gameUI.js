@@ -4,9 +4,22 @@ import Ball from "./ball.js";
 import Barre from "./classBarre.js";
 import Grid from "./grid.js";
 
-
+/**
+ * Interface principale du jeu Casse-Brique
+ * Gère l'initialisation et le rendu de tous les éléments du jeu
+ *
+ * @export
+ * @class GameUI
+ */
 export default class GameUI {
 
+    /**
+     * Crée une instance de GameUI
+     *
+     * @constructor
+     * @param {HTMLCanvasElement} canvas - Le canvas HTML pour le rendu du jeu
+     * @param {number} nbVie - Nombre de vies initial (paramètre actuellement non utilisé)
+     */
     constructor(canvas, nbVie /** @type {number} */){
         this.score = new Score(); // score
         this.vie = new Vie(); // nombre de vies
@@ -17,6 +30,12 @@ export default class GameUI {
         this.grid = new Grid(10, 6, 75, 15, 10, 30, this.canvas);
     }
 
+    /**
+     * Dessine tous les éléments du jeu sur le canvas
+     * Met à jour et affiche : balle, grille, vies, score et barre
+     *
+     * @returns {void}
+     */
     draw(){
         let ctx = this.canvas.getContext("2d");
         

@@ -1,16 +1,20 @@
 /**
- * @class
+ * Balle du jeu Casse-Brique
+ * Gère le mouvement, les collisions et l'affichage de la balle
  *
- * @description
- * Cette classe permet de créer une balle
- *
- * @param {number} x - la position des absis.
- * @param {number} y - la position des ordonnées
- * @param {number} radius - le rayon de la balle.
- * @param {string} [color="blue"] - la couleur de la balle.
+ * @class Ball
  */
 class Ball {
-    
+
+    /**
+     * Crée une instance de Ball
+     *
+     * @constructor
+     * @param {number} x - Position initiale en X (abscisse)
+     * @param {number} y - Position initiale en Y (ordonnée)
+     * @param {number} radius - Rayon de la balle en pixels
+     * @param {string} [color="blue"] - Couleur de la balle
+     */
     constructor(x, y, radius, color = "blue") {
 
         this.x = x;             // Position de X
@@ -18,10 +22,16 @@ class Ball {
         this.radius = radius;   // Rayon
         this.color = color;     // Couleur
         // Vitesses par défaut
-        this.dx = 2;
-        this.dy = -2;
+        this.dx = 2;            // Vitesse horizontale
+        this.dy = -2;           // Vitesse verticale
     }
 
+    /**
+     * Dessine la balle sur le canvas
+     *
+     * @param {CanvasRenderingContext2D} ctx - Contexte de rendu 2D du canvas
+     * @returns {void}
+     */
     draw(ctx) {
         ctx.beginPath();               // Début d dessin
         ctx.fillStyle = this.color;    // on choisi la couleur qu'on a defini avant
@@ -35,7 +45,18 @@ class Ball {
         ctx.fill();                    // Remplissage du cercle
         ctx.closePath();               // Fin du dessin
     }
-    //  Mouvement et Collisions de la Balle
+
+    /**
+     * Gère le mouvement de la balle et toutes ses collisions
+     * Vérifie les collisions avec les murs, la barre, le sol et les blocs
+     *
+     * @param {HTMLCanvasElement} canvas - Canvas HTML pour les limites du jeu
+     * @param {Object} livesObj - Objet contenant le nombre de vies (propriété lives)
+     * @param {Object} paddle - Objet barre avec propriétés paddleX, paddleWidth, paddleHeight
+     * @param {Object} grid - Grille de briques avec propriétés rowCount, columnCount, bricks
+     * @param {Object} score - Objet score avec méthode scoreUp()
+     * @returns {void}
+     */
     move(canvas, livesObj ,paddle, grid, score ) {
 
         // quand sa touche les murs sur les cotés
