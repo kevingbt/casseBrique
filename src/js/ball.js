@@ -36,7 +36,7 @@ class Ball {
         ctx.closePath();               // Fin du dessin
     }
     //  Mouvement et Collisions de la Balle
-    move(canvas, livesObj ,paddle ) {
+    move(canvas, livesObj, paddle ) {
 
         // quand sa touche les murs sur les cotés
         if (this.x + this.dx > canvas.width - this.radius || this.x + this.dx < this.radius) {
