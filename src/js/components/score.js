@@ -39,6 +39,6 @@ export default class Score {
   draw(ctx){  //param : canva
     ctx.font = "16px Arial";
     ctx.fillStyle = "#0095DD";
-    ctx.fillText(`Score: ${this.score}`, 8, 20);
+    ctx.fillText(`Score: ${this.score}`, 280, 20);
   }
 }
