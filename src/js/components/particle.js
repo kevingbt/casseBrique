@@ -16,12 +16,14 @@ export default class Particle {
   constructor(x, y, color) {
     this.x = x;
     this.y = y;
-    this.vx = (Math.random() - 0.5) * 8;
-    this.vy = (Math.random() - 0.5) * 8;
+    this.vx = (Math.random() - 0.5) * 12;
+    this.vy = (Math.random() - 0.5) * 12;
     this.color = color;
     this.life = 1.0;
     this.decay = 0.02;
-    this.size = Math.random() * 3 + 2;
+    this.size = Math.random() * 12 + 12;
+    this.rotation = Math.random() * Math.PI * 2;
+    this.rotationSpeed = (Math.random() - 0.5) * 0.2;
   }
 
   /**
@@ -32,8 +34,9 @@ export default class Particle {
   update() {
     this.x += this.vx;
     this.y += this.vy;
-    this.vy += 0.2;
+    this.vy += 0.05;
     this.life -= this.decay;
+    this.rotation += this.rotationSpeed;
     return this.life > 0;
   }
 
@@ -46,8 +49,17 @@ export default class Particle {
   draw(ctx) {
     ctx.save();
     ctx.globalAlpha = this.life;
+    ctx.translate(this.x + this.size/2, this.y + this.size/2);
+    ctx.rotate(this.rotation);
+    
+    // Ombre
+    ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
+    ctx.shadowBlur = 5;
+    ctx.shadowOffsetX = 2;
+    ctx.shadowOffsetY = 2;
+    
     ctx.fillStyle = this.color;
-    ctx.fillRect(this.x, this.y, this.size, this.size);
+    ctx.fillRect(-this.size/2, -this.size/2, this.size, this.size);
     ctx.restore();
   }
 }
