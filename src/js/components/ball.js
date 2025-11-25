@@ -21,7 +21,6 @@ class Ball {
         this.y = y;             // Position de Y
         this.radius = radius;   // Rayon
         this.color = color;     // Couleur
-        this.brick = brick;
         // Vitesses par défaut
         this.dx = 2;            // Vitesse horizontale
         this.dy = -2;           // Vitesse verticale
