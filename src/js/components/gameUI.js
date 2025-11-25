@@ -3,6 +3,7 @@ import Score from "./score.js";
 import Ball from "./ball.js";
 import Barre from "./classBarre.js";
 import Grid from "./grid.js";
+import { particleManager } from "./bloc.js";
 
 /**
  * Interface principale du jeu Casse-Brique
@@ -36,9 +37,11 @@ export default class GameUI {
         this.grid = new Grid(10, 6, (this.canvas.width/11), (this.canvas.width/50), 10, 30, this.canvas);
     }
 
+
+
     /**
      * Dessine tous les éléments du jeu sur le canvas
-     * Met à jour et affiche : balle, grille, vies, score et barre
+     * Met à jour et affiche : balle, grille, vies, score, barre et particules
      *
      * @returns {void}
      */
@@ -48,11 +51,17 @@ export default class GameUI {
         // Déplacer la balle
         this.ballList[0].move(this.canvas, this.vie, this.barre, this.grid, this.score);
         
+        // Mettre à jour les particules
+        particleManager.update();
+        
         // Dessiner la balle
         this.ballList[0].draw(ctx);
         
-// affiche grille
+        // affiche grille
         this.grid.draw(ctx);
+
+        // affiche particules (après la grille pour qu'elles apparaissent au-dessus)
+        particleManager.draw(ctx);
 
         // affiche vie
         this.vie.draw(ctx);
@@ -62,6 +71,8 @@ export default class GameUI {
 
         // affiche barre (paddle)
         this.barre.drawPaddle();
+        this.barre.deplacerLaRaquette();
+
     };
     
 }

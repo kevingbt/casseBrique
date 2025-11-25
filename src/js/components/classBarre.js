@@ -41,60 +41,65 @@ class Barre {
     document.addEventListener("mousemove", this.mouseMoveHandler);
   }
 
-  /**
-   * Gère l'appui sur une touche du clavier
-   * Détecte les flèches gauche/droite et déplace la barre
-   *
-   * @param {KeyboardEvent} e - Événement clavier
-   * @returns {void}
-   */
-  keyDownHandler(e) {
-    //console.log("keyDownHandler")
-    //console.log(`e.key=${e.key}`)
-    if (e.key === "Right" || e.key === "ArrowRight") {
-      this.rightPressed = true;
-      if (
-        this.rightPressed &&
-        this.paddleX < this.canvas.width - this.paddleWidth
-      ) {
-        this.paddleX += 7;
-      }
-    } else if (e.key === "Left" || e.key === "ArrowLeft") {
-      // console.log("touche gauche ok")
-      this.leftPressed = true;
-      if (this.leftPressed && this.paddleX > 0) {
-        this.paddleX -= 7;
-      }
+    /**
+     * Gère l'appui sur une touche du clavier
+     * Détecte les flèches gauche/droite et déplace la barre
+     *
+     * @param {KeyboardEvent} e - Événement clavier
+     * @returns {void}
+     */
+    keyDownHandler(e) {
+        if (e.key === "Right" || e.key === "ArrowRight") {
+            this.rightPressed = true; // JUSTE ÇA. Pas de mouvement ici !
+        } else if (e.key === "Left" || e.key === "ArrowLeft") {
+            this.leftPressed = true;  // JUSTE ÇA.
+        }
     }
-  }
 
-  /**
-   * Gère le relâchement d'une touche du clavier
-   * Arrête le déplacement de la barre
-   *
-   * @param {KeyboardEvent} e - Événement clavier
-   * @returns {void}
-   */
-  keyUpHandler(e) {
-    if (e.key === "Right" || e.key === "ArrowRight") {
-      this.rightPressed = false;
-    } else if (e.key === "Left" || e.key === "ArrowLeft") {
-      this.leftPressed = false;
+    /**
+     * Gère le relâchement d'une touche du clavier
+     * Arrête le déplacement de la barre
+     *
+     * @param {KeyboardEvent} e - Événement clavier
+     * @returns {void}
+     */
+    keyUpHandler(e) {
+        if (e.key === "Right" || e.key === "ArrowRight") {
+            this.rightPressed = false;
+        } else if (e.key === "Left" || e.key === "ArrowLeft") {
+            this.leftPressed = false;
+        }
     }
-  }
-  /**
-   * Gère le mouvement de la souris
-   * Déplace la barre pour suivre la position horizontale de la souris
-   *
-   * @param {MouseEvent} e - Événement souris
-   * @returns {void}
-   */
-  mouseMoveHandler(e) {
-    const relativeX = e.clientX - this.canvas.offsetLeft;
-    if (relativeX > 0 && relativeX < this.canvas.width) {
-      this.paddleX = relativeX - this.paddleWidth / 2;
+
+    // Cette fonction est appelée 60 fois par seconde automatiquement
+    deplacerLaRaquette() {
+        // On vérifie l'état des interrupteurs
+        if (this.rightPressed) {
+            // On vérifie les murs ICI
+            if (this.paddleX < this.canvas.width - this.paddleWidth) {
+                this.paddleX += 4; // Vitesse constante et FLUIDE
+            }
+        }
+        else if (this.leftPressed) {
+            // On vérifie les murs ICI
+            if (this.paddleX > 0) {
+                this.paddleX -= 4; // Vitesse constante et FLUIDE
+            }
+        }
     }
-  }
+    /**
+     * Gère le mouvement de la souris
+     * Déplace la barre pour suivre la position horizontale de la souris
+     *
+     * @param {MouseEvent} e - Événement souris
+     * @returns {void}
+     */
+    mouseMoveHandler(e) {
+        const relativeX = e.clientX - this.canvas.offsetLeft;
+        if (relativeX > 0 && relativeX < this.canvas.width) {
+            this.paddleX = relativeX - this.paddleWidth / 2;
+        }
+    }
 
   /**
    * Dessine la barre sur le canvas

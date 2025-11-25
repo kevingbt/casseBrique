@@ -72,7 +72,7 @@ initializeBricks() {
             newBrick = new BlocDur(x, y, this.width, this.height,"blue");
         } 
         else {
-            // Le reste : briques standard violettes
+            // Le reste : briques standard grises
             newBrick = new Bloc(x, y, this.width, this.height, "grey");
         }
 
