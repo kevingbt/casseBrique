@@ -1,7 +1,26 @@
 import Bloc from "./bloc.js";
 
+/**
+ * Grille de briques pour le jeu Casse-Brique
+ * Gère la création, l'organisation et l'affichage de la grille de blocs
+ *
+ * @export
+ * @class Grid
+ */
 export default class Grid {
 
+  /**
+   * Crée une instance de Grid
+   *
+   * @constructor
+   * @param {number} columnCount - Nombre de colonnes de briques
+   * @param {number} rowCount - Nombre de lignes de briques
+   * @param {number} width - Largeur d'une brique en pixels
+   * @param {number} height - Hauteur d'une brique en pixels
+   * @param {number} padding - Espacement entre les briques en pixels
+   * @param {number} offsetTop - Marge supérieure de la grille en pixels
+   * @param {HTMLCanvasElement} canvas - Canvas HTML pour le rendu
+   */
   constructor(
     columnCount, rowCount, width, height, padding, offsetTop, canvas
   ) {
@@ -22,19 +41,19 @@ export default class Grid {
     this.initializeBricks();
   }
 
-
-  initializeBricks() {
-    console.log(this.canvas)
-
-    console.log("Initialisation de la grille");
+  /**
+   * Initialise le tableau de briques avec leurs positions
+   * Calcule automatiquement les positions pour centrer la grille horizontalement
+   *
+   * @returns {void}
+   */
+initializeBricks() {
     // Largeur totale de la grille
     const totalGridWidth =
       this.columnCount * this.width +
       (this.columnCount - 1) * this.padding;
 
     // Centrage horizontal PARFAIT
-    console.log(`this.canvas.width = ${this.canvas.width}`);
-    console.log(`totalGridWidth = ${totalGridWidth}`);
     const offsetLeft = (this.canvas.width - totalGridWidth) / 2;
 
     // Construction ligne par ligne
@@ -42,41 +61,45 @@ export default class Grid {
       this.bricks[row] = [];
 
       for (let col = 0; col < this.columnCount; col++) {
-
-        console.log(`offsetLeft = ${offsetLeft}`);
-        console.log(`col = ${col}`);
-        console.log(`this.width = ${this.width}`);
-        console.log(`this.padding = ${this.padding}`);
         const x = offsetLeft + col * (this.width + this.padding);
         const y = this.offsetTop + row * (this.height + this.padding);
-
-        console.log(`x=${x}, y=${y}`)
 
         this.bricks[row][col] = {
           x,
           y,
           width: this.width,
-          height: this.height
+          height: this.height,
+          status: 1
         };
       }
     }
   }
 
+  /**
+   * Retourne le tableau de briques
+   *
+   * @returns {Array<Array<Object>>} Tableau 2D des briques avec leurs propriétés
+   */
   getBricks() {
     return this.bricks;
   }
 
-  draw(ctx) {
+  /**
+   * Dessine toutes les briques actives sur le canvas
+   *
+   * @param {CanvasRenderingContext2D} ctx - Contexte de rendu 2D du canvas
+   * @returns {void}
+   */
+draw(ctx) {
     // On nettoie la zone d'affichage
     //ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    console.log(`this.bricks = ${this.bricks}`)
     this.bricks.forEach(row => {
       // Parcourir ensuite, chaque élément d'une rangée
       row.forEach( block => {
-        console.log(`block = ${block}`)
-        console.log(block)
-        let bloc = new Bloc( block.x, block.y, block.width, block.height );
-        bloc.draw(ctx);
+        if (block.status == 1) {
+          let bloc = new Bloc( block.x, block.y, block.width, block.height );
+          bloc.draw(ctx);
+        }
       })
       }
     );

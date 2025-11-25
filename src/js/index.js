@@ -1,7 +1,4 @@
-import Ball from "./ball.js";
-import GameUI from "./gameUI.js";
-import Grid from "./grid.js";
-import Barre from "./classBarre.js";
+import GameUI from "./components/gameUI.js";
 
 /**
  * Point d'entrée principal du jeu Casse-Brique
@@ -18,9 +15,6 @@ canvas.height = 400;
 
 // Initialisation du jeu
 const gameUI = new GameUI(canvas, 3);
-const grid = new Grid(10, 6, 75, 15, 10, 30, canvas);
-const ball = new Ball(10, 10, 10, grid);
-const paddle = new Barre(canvas);
 
 
 /**
@@ -32,8 +26,6 @@ function gameLoop() {
 
   // Dessiner les éléents du jeu
   gameUI.draw();
-  ball.move(canvas, gameUI, paddle);
-
   // Continuer la boucle
   requestAnimationFrame(gameLoop);
 }
