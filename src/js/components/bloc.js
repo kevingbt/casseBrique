@@ -219,9 +219,7 @@ export class Bloc {
     if (this.status > 0) {
       ctx.beginPath();
       
-      // Ajuster l'opacité selon le nombre de hits restants
-      const opacity = this.status / this.maxHits;
-      ctx.globalAlpha = Math.max(0.3, opacity);
+
       
       ctx.fillStyle = this.color;
       ctx.rect(this.x, this.y, this.width, this.height);
