@@ -10,8 +10,8 @@ const canvas = /** @type {HTMLCanvasElement} */ (document.getElementById("canvaG
 const ctx = canvas.getContext("2d");
 
 // Taille du canvas
-canvas.width = 600;
-canvas.height = 400;
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight-100;
 
 // Initialisation du jeu
 const gameUI = new GameUI(canvas, 3);

@@ -24,7 +24,7 @@ export default class GameUI {
         this.score = new Score(); // score
         this.vie = new Vie(); // nombre de vies
         this.ballList = []; // liste des balles (par défaut: ballList[0])
-        this.ballList.push(new Ball(300, 300, 10));
+        this.ballList.push(new Ball(300, 300, (canvas.width/70)));
         this.canvas = canvas;
         this.barre = new Barre(canvas);
         this.grid = new Grid(10, 6, (this.canvas.width/11), (this.canvas.height/50), 10, 30, this.canvas);
