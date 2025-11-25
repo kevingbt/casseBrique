@@ -20,14 +20,20 @@ export default class GameUI {
      * @param {HTMLCanvasElement} canvas - Le canvas HTML pour le rendu du jeu
      * @param {number} nbVie - Nombre de vies initial (paramètre actuellement non utilisé)
      */
+
     constructor(canvas, nbVie /** @type {number} */){
+        const rowGrid= 6 // nombre de ligne de brique
+        const colGrid = 10 // nombre de colonne de brique
+        let radBall = canvas.width/70 
+        let largeBloc = (canvas.width-100)/colGrid // largeur d'une brique
+        let hautBloc = (canvas.height*0.5)/rowGrid // hauteur d'une brique
         this.score = new Score(); // score
         this.vie = new Vie(); // nombre de vies
         this.ballList = []; // liste des balles (par défaut: ballList[0])
-        this.ballList.push(new Ball(300, 300, (canvas.width/70)));
+        this.ballList.push(new Ball(300, 300, radBall));
         this.canvas = canvas;
         this.barre = new Barre(canvas);
-        this.grid = new Grid(10, 6, (this.canvas.width/11), (this.canvas.height/50), 10, 30, this.canvas);
+        this.grid = new Grid(colGrid, rowGrid, largeBloc, hautBloc, 10, 30, this.canvas);
     }
 
     /**

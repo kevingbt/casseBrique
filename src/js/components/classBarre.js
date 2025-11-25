@@ -20,8 +20,8 @@ class Barre {
 
         // Paramètres barre
         this.paddleHeight = paddleHeight;
-        if (canvas.width<75){
-            this.paddleWidth= 75
+        if (canvas.width<100){
+            this.paddleWidth= 100
         }else{
             this.paddleWidth = paddleWidth
         }
