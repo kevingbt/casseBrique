@@ -3,6 +3,7 @@ import Score from "./score.js";
 import Ball from "./ball.js";
 import Barre from "./classBarre.js";
 import Grid from "./grid.js";
+import { particleManager, blocEventEmitter, BlocEvents } from "./bloc.js";
 
 /**
  * Interface principale du jeu Casse-Brique
@@ -28,11 +29,24 @@ export default class GameUI {
         this.canvas = canvas;
         this.barre = new Barre(canvas);
         this.grid = new Grid(7, 6, 75, 15, 10, 30, this.canvas);
+        
+        // S'abonner aux événements de destruction de blocs (DIP : dépend de l'abstraction)
+        this.setupEventListeners();
+    }
+
+    /**
+     * Configure les écouteurs d'événements pour les blocs
+     * @private
+     */
+    setupEventListeners() {
+        blocEventEmitter.on(BlocEvents.DESTROYED, (data) => {
+            particleManager.createExplosion(data.x, data.y, data.color, 20);
+        });
     }
 
     /**
      * Dessine tous les éléments du jeu sur le canvas
-     * Met à jour et affiche : balle, grille, vies, score et barre
+     * Met à jour et affiche : balle, grille, vies, score, barre et particules
      *
      * @returns {void}
      */
@@ -42,11 +56,17 @@ export default class GameUI {
         // Déplacer la balle
         this.ballList[0].move(this.canvas, this.vie, this.barre, this.grid, this.score);
         
+        // Mettre à jour les particules
+        particleManager.update();
+        
         // Dessiner la balle
         this.ballList[0].draw(ctx);
         
-// affiche grille
+        // affiche grille
         this.grid.draw(ctx);
+
+        // affiche particules (après la grille pour qu'elles apparaissent au-dessus)
+        particleManager.draw(ctx);
 
         // affiche vie
         this.vie.draw(ctx);
