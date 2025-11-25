@@ -1,114 +1,5 @@
-/**
- * Particule d'explosion pour l'animation de destruction des blocs
- * Représente une particule avec position, vélocité et durée de vie
- *
- * @class Particle
- */
-class Particle {
-  /**
-   * Crée une instance de Particle
-   *
-   * @constructor
-   * @param {number} x - Position X initiale
-   * @param {number} y - Position Y initiale
-   * @param {string} color - Couleur de la particule
-   */
-  constructor(x, y, color) {
-    this.x = x;
-    this.y = y;
-    this.vx = (Math.random() - 0.5) * 8;
-    this.vy = (Math.random() - 0.5) * 8;
-    this.color = color;
-    this.life = 1.0;
-    this.decay = 0.02;
-    this.size = Math.random() * 3 + 2;
-  }
-
-  /**
-   * Met à jour la position et la durée de vie de la particule
-   *
-   * @returns {boolean} true si la particule est encore active, false sinon
-   */
-  update() {
-    this.x += this.vx;
-    this.y += this.vy;
-    this.vy += 0.2;
-    this.life -= this.decay;
-    return this.life > 0;
-  }
-
-  /**
-   * Dessine la particule sur le canvas
-   *
-   * @param {CanvasRenderingContext2D} ctx - Contexte de rendu 2D du canvas
-   * @returns {void}
-   */
-  draw(ctx) {
-    ctx.save();
-    ctx.globalAlpha = this.life;
-    ctx.fillStyle = this.color;
-    ctx.fillRect(this.x, this.y, this.size, this.size);
-    ctx.restore();
-  }
-}
-
-/**
- * Gestionnaire d'animations de particules
- * Centralise la gestion de toutes les particules actives
- *
- * @class ParticleManager
- */
-class ParticleManager {
-  constructor() {
-    this.particles = [];
-  }
-
-  /**
-   * Ajoute une explosion de particules à une position donnée
-   *
-   * @param {number} x - Position X de l'explosion
-   * @param {number} y - Position Y de l'explosion
-   * @param {string} color - Couleur des particules
-   * @param {number} count - Nombre de particules à générer
-   * @returns {void}
-   */
-  createExplosion(x, y, color, count = 15) {
-    for (let i = 0; i < count; i++) {
-      this.particles.push(new Particle(x, y, color));
-    }
-  }
-
-  /**
-   * Met à jour toutes les particules et retire celles qui sont terminées
-   *
-   * @returns {void}
-   */
-  update() {
-    this.particles = this.particles.filter(particle => particle.update());
-  }
-
-  /**
-   * Dessine toutes les particules actives
-   *
-   * @param {CanvasRenderingContext2D} ctx - Contexte de rendu 2D du canvas
-   * @returns {void}
-   */
-  draw(ctx) {
-    this.particles.forEach(particle => particle.draw(ctx));
-  }
-
-  /**
-   * Vérifie s'il y a des particules actives
-   *
-   * @returns {boolean} true s'il y a des particules actives
-   */
-  hasActiveParticles() {
-    return this.particles.length > 0;
-  }
-}
-
-// Instance globale du gestionnaire de particules
-const particleManager = new ParticleManager();
+import EventEmitter from "./eventEmitter.js";
+import ParticleManager from "./particleManager.js";
 
 /**
  * Événements de bloc pour le pattern Observer
@@ -117,30 +8,11 @@ export const BlocEvents = {
   DESTROYED: 'bloc:destroyed'
 };
 
-/**
- * Système d'événements simple pour découpler les composants
- */
-class EventEmitter {
-  constructor() {
-    this.events = {};
-  }
-
-  on(event, callback) {
-    if (!this.events[event]) {
-      this.events[event] = [];
-    }
-    this.events[event].push(callback);
-  }
-
-  emit(event, data) {
-    if (this.events[event]) {
-      this.events[event].forEach(callback => callback(data));
-    }
-  }
-}
-
 // Emetteur global d'événements de blocs
-const blocEventEmitter = new EventEmitter();
+export const blocEventEmitter = new EventEmitter();
+
+// Instance globale du gestionnaire de particules
+export const particleManager = new ParticleManager();
 
 /**
  * Brique individuelle du jeu Casse-Brique
@@ -189,12 +61,6 @@ export class Bloc {
   }
 
   /**
-   * Dessine la brique sur le canvas si elle est active
-   *
-   * @param {CanvasRenderingContext2D} ctx - Contexte de rendu 2D du canvas
-   * @returns {void}
-   */
-  /**
    * Gère la collision avec la brique
    *
    * @returns {boolean} true si la brique est détruite, false sinon
@@ -218,8 +84,6 @@ export class Bloc {
     // Dessiner la brique si elle est active (status > 0)
     if (this.status > 0) {
       ctx.beginPath();
-      
-
       
       ctx.fillStyle = this.color;
       ctx.rect(this.x, this.y, this.width, this.height);
@@ -252,11 +116,7 @@ export class Bloc {
     this.status = 0;
     return true;
   }
-
 }
-
-// Exporter les utilitaires pour utilisation externe
-export { particleManager, blocEventEmitter };
 
 export class BlocDur extends Bloc{
     /**
