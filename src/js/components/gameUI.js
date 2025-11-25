@@ -76,6 +76,8 @@ export default class GameUI {
 
         // affiche barre (paddle)
         this.barre.drawPaddle();
+        this.barre.deplacerLaRaquette();
+
     };
     
 }
