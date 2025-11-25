@@ -1,13 +1,18 @@
+/**
+ * Barre de contrôle du joueur (paddle)
+ * Gère le déplacement et l'affichage de la barre contrôlée par clavier ou souris
+ *
+ * @class Barre
+ */
 class Barre {
 
     /**
-     * Creates an instance of Barre.
+     * Crée une instance de Barre
      *
      * @constructor
-     * @param {*} canvas 
-     * @param {*} ctx 
-     * @param {number} [paddleHeight=10] 
-     * @param {number} [paddleWidth=75] 
+     * @param {HTMLCanvasElement} canvas - Canvas HTML pour le rendu et la détection des limites
+     * @param {number} [paddleHeight=10] - Hauteur de la barre en pixels
+     * @param {number} [paddleWidth=75] - Largeur de la barre en pixels
      */
     constructor(canvas, paddleHeight = 10, paddleWidth = 75) {
         this.canvas = canvas;
@@ -34,9 +39,11 @@ class Barre {
     }
 
     /**
-     * Description placeholder
+     * Gère l'appui sur une touche du clavier
+     * Détecte les flèches gauche/droite et déplace la barre
      *
-     * @param {*} e 
+     * @param {KeyboardEvent} e - Événement clavier
+     * @returns {void}
      */
     keyDownHandler(e) {
       //console.log("keyDownHandler")
@@ -54,12 +61,13 @@ class Barre {
     }
 
     /**
-     * Description placeholder
+     * Gère le relâchement d'une touche du clavier
+     * Arrête le déplacement de la barre
      *
-     * @param {*} e 
+     * @param {KeyboardEvent} e - Événement clavier
+     * @returns {void}
      */
-    keyUpHandler(e) {
-      console.log("keyUpHandler")
+keyUpHandler(e) {
         if (e.key === "Right" || e.key === "ArrowRight") {
             this.rightPressed = false;
         } else if (e.key === "Left" || e.key === "ArrowLeft") {
@@ -67,9 +75,11 @@ class Barre {
         }
     }
     /**
-     * Description placeholder
+     * Gère le mouvement de la souris
+     * Déplace la barre pour suivre la position horizontale de la souris
      *
-     * @param {*} e 
+     * @param {MouseEvent} e - Événement souris
+     * @returns {void}
      */
     mouseMoveHandler(e) {
         const relativeX = e.clientX - this.canvas.offsetLeft;
@@ -78,9 +88,12 @@ class Barre {
         }
     }
 
-    /** Description placeholder */
+    /**
+     * Dessine la barre sur le canvas
+     *
+     * @returns {void}
+     */
     drawPaddle() {
-        console.log("test", this.ctx)
         this.ctx.beginPath();
         this.ctx.rect(
             this.paddleX,
