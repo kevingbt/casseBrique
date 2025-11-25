@@ -46,18 +46,11 @@ class Barre {
      * @returns {void}
      */
     keyDownHandler(e) {
-      //console.log("keyDownHandler")
-      //console.log(`e.key=${e.key}`)
         if (e.key === "Right" || e.key === "ArrowRight") {
-            this.rightPressed = true;
-        if (this.rightPressed && this.paddleX < this.canvas.width - this.paddleWidth) {
-          this.paddleX += 7;}
+            this.rightPressed = true; // JUSTE ÇA. Pas de mouvement ici !
         } else if (e.key === "Left" || e.key === "ArrowLeft") {
-         // console.log("touche gauche ok")
-            this.leftPressed = true;
-           if (this.leftPressed && this.paddleX > 0) {
-          this.paddleX -= 7; }
-          } 
+            this.leftPressed = true;  // JUSTE ÇA.
+        }
     }
 
     /**
@@ -67,11 +60,28 @@ class Barre {
      * @param {KeyboardEvent} e - Événement clavier
      * @returns {void}
      */
-keyUpHandler(e) {
+    keyUpHandler(e) {
         if (e.key === "Right" || e.key === "ArrowRight") {
             this.rightPressed = false;
         } else if (e.key === "Left" || e.key === "ArrowLeft") {
             this.leftPressed = false;
+        }
+    }
+
+    // Cette fonction est appelée 60 fois par seconde automatiquement
+    deplacerLaRaquette() {
+        // On vérifie l'état des interrupteurs
+        if (this.rightPressed) {
+            // On vérifie les murs ICI
+            if (this.paddleX < this.canvas.width - this.paddleWidth) {
+                this.paddleX += 4; // Vitesse constante et FLUIDE
+            }
+        }
+        else if (this.leftPressed) {
+            // On vérifie les murs ICI
+            if (this.paddleX > 0) {
+                this.paddleX -= 4; // Vitesse constante et FLUIDE
+            }
         }
     }
     /**
