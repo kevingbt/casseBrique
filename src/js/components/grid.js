@@ -1,4 +1,4 @@
-import Bloc from "./bloc.js";
+import { Bloc, BlocDur } from "./bloc.js";
 
 /**
  * Grille de briques pour le jeu Casse-Brique
@@ -64,18 +64,20 @@ initializeBricks() {
         const x = offsetLeft + col * (this.width + this.padding);
         const y = this.offsetTop + row * (this.height + this.padding);
 
-        // Définir la couleur et le status selon la ligne : lignes paires = bleu (2 hits), lignes impaires = violet (1 hit)
-        const color = (row % 2 === 0) ? "blue" : "purple";
-        const status = (row % 2 === 0) ? 2 : 1;
-        
-        this.bricks[row][col] = {
-          x,
-          y,
-          width: this.width,
-          height: this.height,
-          status: status,
-          color: color
-        };
+        // --- LOGIQUE DE GÉNÉRATION DES TYPES DE BRIQUES ---
+        let newBrick;
+
+        if (Math.random() < 0.20) {
+            // 10% de chance d'avoir un bloc dur (aléatoire)
+            newBrick = new BlocDur(x, y, this.width, this.height,"blue");
+        } 
+        else {
+            // Le reste : briques standard violettes
+            newBrick = new Bloc(x, y, this.width, this.height, "grey");
+        }
+
+        // On stocke l'instance de la classe dans le tableau
+        this.bricks[row][col] = newBrick;
       }
     }
   }
@@ -99,14 +101,13 @@ draw(ctx) {
     // On nettoie la zone d'affichage
     //ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.bricks.forEach(row => {
-      // Parcourir ensuite, chaque élément d'une rangée
-      row.forEach( block => {
-        if (block.status > 0) {
-          let bloc = new Bloc( block.x, block.y, block.width, block.height, block.color, block.status );
-          bloc.draw(ctx);
+      row.forEach(bloc => {
+        // On utilise directement l'instance stockée !
+        // (Plus de "new Bloc()" ici, sinon on perdrait les PV des briques dures)
+        if (bloc.status !== 0) {
+             bloc.draw(ctx);
         }
-      })
-      }
-    );
+      });
+    });
   }
 }

@@ -4,7 +4,7 @@
  *
  * @class Bloc
  */
-class Bloc {
+export class Bloc {
 
   /**
    * Crée une instance de Bloc
@@ -99,6 +99,37 @@ class Bloc {
     }
   }
 
+  recevoirCoup(){
+    this.status = 0;
+    return true;
+  }
+
 }
 
-export default Bloc;
+export class BlocDur extends Bloc{
+    /**
+   * @param {number} vie - Nombre de coups nécessaires
+   */
+  constructor(x, y, width, height, color = "blue", vie = 3) {
+    // 1. On appelle le constructeur du parent avec super()
+    super(x, y, width, height, color); 
+    
+    // 2. On ajoute la propriété spécifique
+    this.vie = vie;
+    this.vieMax = vie; // Pour calculer la couleur (optionnel)
+  }
+
+  // Surcharge de la méthode de collision
+  recevoirCoup() {
+    this.vie--;
+
+    // Changement visuel pour montrer les dégâts (s'assombrit)
+    this.color = this.vie === 1 ? "red" : "orange";
+
+    if (this.vie <= 0) {
+      this.status = 0;
+      return true; // Détruit
+    }
+    return false; // Pas encore détruit
+  }
+}

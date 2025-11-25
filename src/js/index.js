@@ -24,7 +24,7 @@ function gameLoop() {
   // Nettoyer le canvas
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  // Dessiner les éléents du jeu
+  // Dessiner les éléments du jeu
   gameUI.draw();
 
 
