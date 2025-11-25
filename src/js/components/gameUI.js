@@ -27,7 +27,7 @@ export default class GameUI {
         this.ballList.push(new Ball(300, 300, 10));
         this.canvas = canvas;
         this.barre = new Barre(canvas);
-        this.grid = new Grid(10, 6, 75, 15, 10, 30, this.canvas);
+        this.grid = new Grid(10, 6, (this.canvas.width/11), (this.canvas.height/50), 10, 30, this.canvas);
     }
 
     /**
