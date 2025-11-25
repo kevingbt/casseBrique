@@ -99,7 +99,7 @@ class Ball {
         for (let r = 0; r < grid.rowCount; r++) {
             for (let c = 0; c < grid.columnCount; c++) {
                 let b = grid.bricks[r][c];
-                if (b.status == 1) {
+                if (b.status > 0) {
                     if (
                         this.x > b.x &&
                         this.x < b.x + b.width &&
@@ -107,7 +107,9 @@ class Ball {
                         this.y < b.y + b.height
                     ) {
                         this.dy = -this.dy;
-                        b.status = 0;
+                        
+                        // Gérer le multihit directement
+                        b.status--;
                         score.scoreUp();
                     }
                 }

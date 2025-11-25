@@ -64,12 +64,17 @@ initializeBricks() {
         const x = offsetLeft + col * (this.width + this.padding);
         const y = this.offsetTop + row * (this.height + this.padding);
 
+        // Définir la couleur et le status selon la ligne : lignes paires = bleu (2 hits), lignes impaires = violet (1 hit)
+        const color = (row % 2 === 0) ? "blue" : "purple";
+        const status = (row % 2 === 0) ? 2 : 1;
+        
         this.bricks[row][col] = {
           x,
           y,
           width: this.width,
           height: this.height,
-          status: 1
+          status: status,
+          color: color
         };
       }
     }
@@ -96,8 +101,8 @@ draw(ctx) {
     this.bricks.forEach(row => {
       // Parcourir ensuite, chaque élément d'une rangée
       row.forEach( block => {
-        if (block.status == 1) {
-          let bloc = new Bloc( block.x, block.y, block.width, block.height );
+        if (block.status > 0) {
+          let bloc = new Bloc( block.x, block.y, block.width, block.height, block.color, block.status );
           bloc.draw(ctx);
         }
       })

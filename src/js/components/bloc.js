@@ -15,15 +15,34 @@ class Bloc {
    * @param {number} width - Largeur de la brique en pixels
    * @param {number} height - Hauteur de la brique en pixels
    * @param {string} [color="purple"] - Couleur de la brique
-   * @param {number} [status=1] - État de la brique (1=actif, 0=détruit)
+   * @param {number} [status=1] - État de la brique (nombre de hits restants)
+   * @param {number} [maxHits=1] - Nombre maximum de hits nécessaires pour détruire la brique
    */
-  constructor(x, y, width, height, color="purple", status = 1){
+  constructor(x, y, width, height, color="purple", status = 1, maxHits = null){
     this.x = x;
     this.y = y;
     this.width = width;
     this.height = height;
     this.color = color;
     this.status = status;
+    this.maxHits = maxHits || this.getMaxHitsByColor(color);
+  }
+
+  /**
+   * Détermine le nombre de hits nécessaires selon la couleur
+   *
+   * @private
+   * @param {string} color - Couleur de la brique
+   * @returns {number} Nombre de hits nécessaires
+   */
+  getMaxHitsByColor(color) {
+    switch(color.toLowerCase()) {
+      case 'blue':
+        return 2;
+      case 'purple':
+      default:
+        return 1;
+    }
   }
 
   /**
@@ -32,15 +51,51 @@ class Bloc {
    * @param {CanvasRenderingContext2D} ctx - Contexte de rendu 2D du canvas
    * @returns {void}
    */
-draw(ctx) {
-    // Dessiner la brique si elle est active (status >= 1)
-    if (this.status != 0) {
+  /**
+   * Gère la collision avec la brique
+   *
+   * @returns {boolean} true si la brique est détruite, false sinon
+   */
+  hit() {
+    if (this.status <= 0) {
+      return true;
+    }
+    
+    this.status--;
+    return this.status <= 0;
+  }
+
+  /**
+   * Dessine la brique sur le canvas si elle est active
+   *
+   * @param {CanvasRenderingContext2D} ctx - Contexte de rendu 2D du canvas
+   * @returns {void}
+   */
+  draw(ctx) {
+    // Dessiner la brique si elle est active (status > 0)
+    if (this.status > 0) {
       ctx.beginPath();
+      
+      // Ajuster l'opacité selon le nombre de hits restants
+      const opacity = this.status / this.maxHits;
+      ctx.globalAlpha = Math.max(0.3, opacity);
+      
       ctx.fillStyle = this.color;
       ctx.rect(this.x, this.y, this.width, this.height);
       ctx.fill();
       ctx.closePath();
       
+      // Réinitialiser l'opacité
+      ctx.globalAlpha = 1.0;
+      
+      // Afficher le nombre de hits restants pour les blocs multihit
+      if (this.maxHits > 1 && this.status > 1) {
+        ctx.fillStyle = 'white';
+        ctx.font = '12px Arial';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(this.status.toString(), this.x + this.width/2, this.y + this.height/2);
+      }
     }
   }
 
