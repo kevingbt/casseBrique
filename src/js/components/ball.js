@@ -19,11 +19,12 @@ class Ball {
   constructor(x, y, radius, color = "blue") {
     this.x = x; // Position de X
     this.y = y; // Position de Y
-    if(radius<10){
-        this.radius = 10
-    }else{
-        this.radius = radius
+    if (radius < 10) {
+      this.radius = 10;
+    } else {
+      this.radius = radius;
     }
+    // Rayon
     this.color = color; // Couleur
     // Vitesses par défaut
     this.dx = 2; // Vitesse horizontale
