@@ -1,15 +1,4 @@
-import EventEmitter from "./eventEmitter.js";
 import ParticleManager from "./particleManager.js";
-
-/**
- * Événements de bloc pour le pattern Observer
- */
-export const BlocEvents = {
-  DESTROYED: 'bloc:destroyed'
-};
-
-// Emetteur global d'événements de blocs
-export const blocEventEmitter = new EventEmitter();
 
 // Instance globale du gestionnaire de particules
 export const particleManager = new ParticleManager();
@@ -106,12 +95,13 @@ export class Bloc {
 
   recevoirCoup(){
     if (this.status > 0) {
-      // Émettre un événement de destruction (SRP : le bloc ne gère que son état)
-      blocEventEmitter.emit(BlocEvents.DESTROYED, {
-        x: this.x + this.width / 2,
-        y: this.y + this.height / 2,
-        color: this.color
-      });
+      // Créer directement les particules d'explosion
+      particleManager.createExplosion(
+        this.x + this.width / 2,
+        this.y + this.height / 2,
+        this.color,
+        20
+      );
     }
     this.status = 0;
     return true;
@@ -139,12 +129,13 @@ export class BlocDur extends Bloc{
     this.color = this.vie === 1 ? "red" : "orange";
 
     if (this.vie <= 0) {
-      // Émettre un événement de destruction (SRP : le bloc ne gère que son état)
-      blocEventEmitter.emit(BlocEvents.DESTROYED, {
-        x: this.x + this.width / 2,
-        y: this.y + this.height / 2,
-        color: this.color
-      });
+      // Créer directement les particules d'explosion
+      particleManager.createExplosion(
+        this.x + this.width / 2,
+        this.y + this.height / 2,
+        this.color,
+        20
+      );
       this.status = 0;
       return true; // Détruit
     }
