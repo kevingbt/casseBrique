@@ -67,7 +67,7 @@ initializeBricks() {
         // --- LOGIQUE DE GÉNÉRATION DES TYPES DE BRIQUES ---
         let newBrick;
 
-        if (Math.random() < 0.10) {
+        if (Math.random() < 0.20) {
             // 10% de chance d'avoir un bloc dur (aléatoire)
             newBrick = new BlocDur(x, y, this.width, this.height,"blue");
         } 
