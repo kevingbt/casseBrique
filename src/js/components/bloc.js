@@ -158,11 +158,11 @@ export class Bloc {
    * @param {number} y - Position verticale (ordonnée) en pixels
    * @param {number} width - Largeur de la brique en pixels
    * @param {number} height - Hauteur de la brique en pixels
-   * @param {string} [color="purple"] - Couleur de la brique
+   * @param {string} [color="grey"] - Couleur de la brique
    * @param {number} [status=1] - État de la brique (nombre de hits restants)
    * @param {number} [maxHits=1] - Nombre maximum de hits nécessaires pour détruire la brique
    */
-  constructor(x, y, width, height, color="purple", status = 1, maxHits = null){
+  constructor(x, y, width, height, color="grey", status = 1, maxHits = null){
     this.x = x;
     this.y = y;
     this.width = width;
@@ -183,7 +183,6 @@ export class Bloc {
     switch(color.toLowerCase()) {
       case 'blue':
         return 2;
-      case 'purple':
       default:
         return 1;
     }
