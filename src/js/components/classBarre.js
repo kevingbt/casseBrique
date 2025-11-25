@@ -14,13 +14,17 @@ class Barre {
      * @param {number} [paddleHeight=10] - Hauteur de la barre en pixels
      * @param {number} [paddleWidth=75] - Largeur de la barre en pixels
      */
-    constructor(canvas, paddleHeight = 10, paddleWidth = 75) {
+    constructor(canvas, paddleHeight = 10, paddleWidth = (canvas.width/15)) {
         this.canvas = canvas;
         this.ctx = this.canvas.getContext("2d");
 
         // Paramètres barre
         this.paddleHeight = paddleHeight;
-        this.paddleWidth = paddleWidth;
+        if (canvas.width<100){
+            this.paddleWidth= 100
+        }else{
+            this.paddleWidth = paddleWidth
+        }
         this.paddleX = (canvas.width - paddleWidth) / 2;
 
         // Déplacement
