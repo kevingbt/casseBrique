@@ -5,9 +5,17 @@
   "type": "module",
   "main": "src/js/index.js",
   "scripts": {
-    "start": "python -m http.server 8000"
+    "start": "python -m http.server 8000",
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "clean": "rm -rf dist"
   },
   "keywords": ["game", "breakout", "canvas"],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "rollup": "^4.0.0",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-html": "^1.0.0"
+  }
 }
