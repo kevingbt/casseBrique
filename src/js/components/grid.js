@@ -8,7 +8,6 @@ import { Bloc, BlocDur } from "./bloc.js";
  * @class Grid
  */
 export default class Grid {
-
   /**
    * Crée une instance de Grid
    *
@@ -22,16 +21,21 @@ export default class Grid {
    * @param {HTMLCanvasElement} canvas - Canvas HTML pour le rendu
    */
   constructor(
-    columnCount, rowCount, width, height, padding, offsetTop, canvas
+    columnCount,
+    rowCount,
+    width,
+    height,
+    padding,
+    offsetTop,
+    canvas
   ) {
-
     // --- PARAMÈTRES transmis---
-    this.columnCount = columnCount;   // nombre de colonnes
-    this.rowCount = rowCount;      // nombre de lignes
-    this.width = width;        // largeur d'une brique
-    this.height = height;       // hauteur d'une brique
-    this.padding = padding;      // espace entre les briques
-    this.offsetTop = offsetTop;    // marge haute de la grille
+    this.columnCount = columnCount; // nombre de colonnes
+    this.rowCount = rowCount; // nombre de lignes
+    this.width = width; // largeur d'une brique
+    this.height = height; // hauteur d'une brique
+    this.padding = padding; // espace entre les briques
+    this.offsetTop = offsetTop; // marge haute de la grille
     this.canvas = canvas; // canvas envoyé depuis le HTML
 
     // Tableau de briques, à vide.
@@ -42,16 +46,44 @@ export default class Grid {
   }
 
   /**
+   
+Recalcule la taille et la position des briques existantes
+@param {number} newWidth - Nouvelle largeur d'une brique
+@param {number} newHeight - Nouvelle hauteur d'une brique*/
+  resize(newWidth, newHeight) {
+    this.width = newWidth;
+    this.height = newHeight;
+
+    // Recalcul du centrage horizontal
+    const totalGridWidth =
+      this.columnCount * this.width + (this.columnCount - 1) * this.padding;
+    const offsetLeft = (this.canvas.width - totalGridWidth) / 2;
+
+    // Mise à jour de chaque brique
+    for (let row = 0; row < this.rowCount; row++) {
+      for (let col = 0; col < this.columnCount; col++) {
+        const b = this.bricks[row][col];
+        // On ne met à jour que si la brique existe
+        if (b) {
+          b.width = this.width;
+          b.height = this.height;
+          b.x = offsetLeft + col * (this.width + this.padding);
+          b.y = this.offsetTop + row * (this.height + this.padding);
+        }
+      }
+    }
+  }
+
+  /**
    * Initialise le tableau de briques avec leurs positions
    * Calcule automatiquement les positions pour centrer la grille horizontalement
    *
    * @returns {void}
    */
-initializeBricks() {
+  initializeBricks() {
     // Largeur totale de la grille
     const totalGridWidth =
-      this.columnCount * this.width +
-      (this.columnCount - 1) * this.padding;
+      this.columnCount * this.width + (this.columnCount - 1) * this.padding;
 
     // Centrage horizontal PARFAIT
     const offsetLeft = (this.canvas.width - totalGridWidth) / 2;
@@ -67,13 +99,12 @@ initializeBricks() {
         // --- LOGIQUE DE GÉNÉRATION DES TYPES DE BRIQUES ---
         let newBrick;
 
-        if (Math.random() < 0.20) {
-            // 10% de chance d'avoir un bloc dur (aléatoire)
-            newBrick = new BlocDur(x, y, this.width, this.height,"blue");
-        } 
-        else {
-            // Le reste : briques standard grises
-            newBrick = new Bloc(x, y, this.width, this.height, "grey");
+        if (Math.random() < 0.2) {
+          // 10% de chance d'avoir un bloc dur (aléatoire)
+          newBrick = new BlocDur(x, y, this.width, this.height, "blue");
+        } else {
+          // Le reste : briques standard grises
+          newBrick = new Bloc(x, y, this.width, this.height, "grey");
         }
 
         // On stocke l'instance de la classe dans le tableau
@@ -97,15 +128,15 @@ initializeBricks() {
    * @param {CanvasRenderingContext2D} ctx - Contexte de rendu 2D du canvas
    * @returns {void}
    */
-draw(ctx) {
+  draw(ctx) {
     // On nettoie la zone d'affichage
     //ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    this.bricks.forEach(row => {
-      row.forEach(bloc => {
+    this.bricks.forEach((row) => {
+      row.forEach((bloc) => {
         // On utilise directement l'instance stockée !
         // (Plus de "new Bloc()" ici, sinon on perdrait les PV des briques dures)
         if (bloc.status !== 0) {
-             bloc.draw(ctx);
+          bloc.draw(ctx);
         }
       });
     });

@@ -35,10 +35,29 @@ export default class GameUI {
         this.canvas = canvas;
         this.barre = new Barre(canvas);
         this.grid = new Grid(10, 6, (this.canvas.width/11), (this.canvas.width/50), 10, 30, this.canvas);
+        window.addEventListener('resize', () => this.handleResize(colGrid, rowGrid));
     }
 
+    handleResize(colGrid, rowGrid) {
+        // 1. Mettre à jour la taille du canvas
+        this.canvas.width = window.innerWidth;
+        this.canvas.height = window.innerHeight - 100;
 
+        // 2. Calculer les nouvelles dimensions des briques
+        // (On reprend la logique du constructeur : width  et height)
+        const newBrickWidth = (this.canvas.width - 100) / colGrid;
+        const newBrickHeight = (this.canvas.height * 0.5) / rowGrid;
 
+        // 3. Appliquer les changements à la grille
+        this.grid.resize(newBrickWidth, newBrickHeight);
+
+        // Optionnel : Recaler la barre au centre ou s'assurer qu'elle ne sort pas de l'écran
+        if (this.barre.paddleX > this.canvas.width - this.barre.paddleWidth) {
+            this.barre.paddleX = this.canvas.width - this.barre.paddleWidth;
+        }
+    }
+    
+    
     /**
      * Dessine tous les éléments du jeu sur le canvas
      * Met à jour et affiche : balle, grille, vies, score, barre et particules
