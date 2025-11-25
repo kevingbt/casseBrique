@@ -35,6 +35,33 @@ export default class GameUI {
         this.canvas = canvas;
         this.barre = new Barre(canvas);
         this.grid = new Grid(colGrid, rowGrid, largeBloc, hautBloc, 10, 30, this.canvas);
+        
+        this.setupResizeListener();
+    }
+
+    /**
+     * Configure l'écouteur d'événement de redimensionnement de la fenêtre
+     */
+    setupResizeListener() {
+        window.addEventListener('resize', () => {
+            // Adapter le canvas aux nouvelles dimensions de la fenêtre
+            this.canvas.width = window.innerWidth;
+            this.canvas.height = window.innerHeight;
+            
+            // Recalculer les dimensions des éléments du jeu
+            const rowGrid = 6;
+            const colGrid = 10;
+            let radBall = this.canvas.width / 70;
+            let largeBloc = (this.canvas.width - 100) / colGrid;
+            let hautBloc = (this.canvas.height * 0.5) / rowGrid;
+            let paddleWidth = this.canvas.width / 8;
+            this.barre.paddleWidth = paddleWidth;
+            
+            // Mettre à jour les éléments avec les nouvelles dimensions
+            this.ballList[0].radius = radBall;
+            this.grid = new Grid(colGrid, rowGrid, largeBloc, hautBloc, 10, 30, this.canvas);
+            this.barre = new Barre(this.canvas);
+        });
     }
 
 
