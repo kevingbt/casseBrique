@@ -24,7 +24,7 @@
 
 
     <script type="module">
-        import Ball  from "../js/ball.js";
+        import Ball  from "../js/components/ball.js";
         let canvas = document.getElementById("myCanvas");
         let ctx = canvas.getContext("2d");
 
@@ -42,10 +42,10 @@
 
             ball.move(canvas, livesObj, paddle);
             ball.draw(ctx);
-            ball2.move(canvas, livesObj, paddle);
-            ball2.draw(ctx);
-            ball3.move(canvas, livesObj, paddle);
-            ball3.draw(ctx);
+            // ball2.move(canvas, livesObj, paddle);
+            // ball2.draw(ctx);
+            // ball3.move(canvas, livesObj, paddle);
+            // ball3.draw(ctx);
 
             requestAnimationFrame(draw);
         }

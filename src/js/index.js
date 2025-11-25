@@ -1,5 +1,4 @@
-import GameUI from "./gameUI.js";
-import Grid from "./grid.js";
+import GameUI from "./components/gameUI.js";
 
 /**
  * Point d'entrée principal du jeu Casse-Brique
@@ -11,8 +10,8 @@ const canvas = /** @type {HTMLCanvasElement} */ (document.getElementById("canvaG
 const ctx = canvas.getContext("2d");
 
 // Taille du canvas
-canvas.width = 600;
-canvas.height = 400;
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight-100;
 
 // Initialisation du jeu
 const gameUI = new GameUI(canvas, 3);
@@ -25,7 +24,7 @@ function gameLoop() {
   // Nettoyer le canvas
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  // Dessiner les éléents du jeu
+  // Dessiner les éléments du jeu
   gameUI.draw();
 
 

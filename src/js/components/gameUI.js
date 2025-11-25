@@ -1,0 +1,97 @@
+import Vie from "./vie.js";
+import Score from "./score.js";
+import Ball from "./ball.js";
+import Barre from "./classBarre.js";
+import Grid from "./grid.js";
+import { particleManager } from "./bloc.js";
+
+/**
+ * Interface principale du jeu Casse-Brique
+ * Gère l'initialisation et le rendu de tous les éléments du jeu
+ *
+ * @export
+ * @class GameUI
+ */
+export default class GameUI {
+
+    /**
+     * Crée une instance de GameUI
+     *
+     * @constructor
+     * @param {HTMLCanvasElement} canvas - Le canvas HTML pour le rendu du jeu
+     * @param {number} nbVie - Nombre de vies initial (paramètre actuellement non utilisé)
+     */
+
+    constructor(canvas, nbVie /** @type {number} */){
+        const rowGrid= 6 // nombre de ligne de brique
+        const colGrid = 10 // nombre de colonne de brique
+        let radBall = canvas.width/70 
+        let largeBloc = (canvas.width-100)/colGrid // largeur d'une brique
+        let hautBloc = (canvas.height*0.5)/rowGrid // hauteur d'une brique
+        this.score = new Score(); // score
+        this.vie = new Vie(); // nombre de vies
+        this.ballList = []; // liste des balles (par défaut: ballList[0])
+        this.ballList.push(new Ball(300, 300, (canvas.width/70)));
+        this.canvas = canvas;
+        this.barre = new Barre(canvas);
+        this.grid = new Grid(10, 6, (this.canvas.width/11), (this.canvas.width/50), 10, 30, this.canvas);
+        window.addEventListener('resize', () => this.handleResize(colGrid, rowGrid));
+    }
+
+    handleResize(colGrid, rowGrid) {
+        // 1. Mettre à jour la taille du canvas
+        this.canvas.width = window.innerWidth;
+        this.canvas.height = window.innerHeight - 100;
+
+        // 2. Calculer les nouvelles dimensions des briques
+        // (On reprend la logique du constructeur : width  et height)
+        const newBrickWidth = (this.canvas.width - 100) / colGrid;
+        const newBrickHeight = (this.canvas.height * 0.5) / rowGrid;
+
+        // 3. Appliquer les changements à la grille
+        this.grid.resize(newBrickWidth, newBrickHeight);
+
+        // Optionnel : Recaler la barre au centre ou s'assurer qu'elle ne sort pas de l'écran
+        if (this.barre.paddleX > this.canvas.width - this.barre.paddleWidth) {
+            this.barre.paddleX = this.canvas.width - this.barre.paddleWidth;
+        }
+    }
+    
+    
+    /**
+     * Dessine tous les éléments du jeu sur le canvas
+     * Met à jour et affiche : balle, grille, vies, score, barre et particules
+     *
+     * @returns {void}
+     */
+    draw(){
+        let ctx = this.canvas.getContext("2d");
+        
+        // Déplacer la balle
+        this.ballList[0].move(this.canvas, this.vie, this.barre, this.grid, this.score);
+        
+        // Mettre à jour les particules
+        particleManager.update();
+        
+        // Dessiner la balle
+        this.ballList[0].draw(ctx);
+        
+        // affiche grille
+        this.grid.draw(ctx);
+
+        // affiche particules (après la grille pour qu'elles apparaissent au-dessus)
+        particleManager.draw(ctx);
+
+        // affiche vie
+        this.vie.draw(ctx);
+
+        // affiche score
+        this.score.draw(ctx);
+
+        // affiche barre (paddle)
+        this.barre.drawPaddle();
+        this.barre.deplacerLaRaquette();
+
+    };
+    
+}
